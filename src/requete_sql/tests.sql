@@ -1,3 +1,5 @@
+USE social_network;
+
 INSERT INTO User (username, email, password, createdAt, updatedAt) VALUES 
 ('Monkey D. Luffy', 'luffy@onepiece.com', 'password', NOW(), NOW()),
 ('Roronoa Zoro', 'zoro@onepiece.com', 'password', NOW(), NOW()),
