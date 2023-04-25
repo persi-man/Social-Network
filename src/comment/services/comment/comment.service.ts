@@ -5,23 +5,23 @@ import { Comment } from 'src/comment/models/comment/comment';
 @Injectable()
 export class CommentService {
     constructor(
-        @InjectRepository(Comment)
-        private commentRepository: Repository<Comment>
+        
+        private commentRepos: Repository<Comment>
     ){}
 
     //créer un commentaire
     async create(comment: Comment):Promise<Comment>{
-        return this.commentRepository.save(comment);
+        return this.commentRepos.save(comment);
     }
 
     //Retourne la liste de tous les commentaires
     async findAll(): Promise<Comment[]>{
-        return this.commentRepository.find();
+        return this.commentRepos.find();
     }
 
     //Rechercher un commentaire via l'id du commentaire
     async find(id: number): Promise<Comment> {
-        return this.commentRepository.findOne({where:{
+        return this.commentRepos.findOne({where:{
             comment_id: id
         }});
       }
@@ -40,8 +40,8 @@ export class CommentService {
     //Mettre à jour un commentaire
 
       async update(id: number, comment: Partial<Comment>): Promise<Comment> {
-        await this.commentRepository.update(id, comment);
-        const updatedComment = await this.commentRepository.findOne({where: {
+        await this.commentRepos.update(id, comment);
+        const updatedComment = await this.commentRepos.findOne({where: {
             comment_id: id
         }});
         if (!updatedComment) {
@@ -51,6 +51,6 @@ export class CommentService {
       }
       //Supprimer un commentaire
       async delete(id: number): Promise<void> {
-        await this.commentRepository.delete(id);
+        await this.commentRepos.delete(id);
       }
 }
